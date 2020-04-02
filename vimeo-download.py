@@ -54,16 +54,18 @@ def download_video(base_url, content):
     idx, _ = max(heights, key=lambda t: t[1])
     video = content[idx]
     video_base_url = urlparse.urljoin(base_url, video["base_url"])
-    print "video base url:", video_base_url
+    print "video base url:"+ video_base_url
 
     # Create INSTANCE_TEMP if it doesn"t exist
     if not os.path.exists(INSTANCE_TEMP):
-        print "Creating {}...".format(INSTANCE_TEMP)
+        # print "Creating {}...".format(INSTANCE_TEMP)
         os.makedirs(INSTANCE_TEMP)
 
     # Download the video portion of the stream
     filename = os.path.join(INSTANCE_TEMP, "v.mp4")
-    print "saving to %s" % filename
+    # print "saving to %s" % filename
+    print "saving to filename ::"+filename
+
 
     video_file = open(filename, "wb")
 
@@ -92,17 +94,18 @@ def download_audio(base_url, content):
     result = True
     audio = content[0]
     audio_base_url = urlparse.urljoin(base_url, audio["base_url"])
-    print "audio base url:", audio_base_url
+    print "audio base url:"+ audio_base_url
 
 
     # Create INSTANCE_TEMP if it doesn"t exist
     if not os.path.exists(INSTANCE_TEMP):
-        print "Creating {}...".format(INSTANCE_TEMP)
+        # print "Creating {}...".format(INSTANCE_TEMP)
         os.makedirs(INSTANCE_TEMP)
 
     # Download
     filename = os.path.join(INSTANCE_TEMP, "a.mp3")
-    print "saving to %s" % filename
+    # print "saving to %s" % filename
+    print "saving to filename ::"+filename
 
     audio_file = open(filename, "wb")
 
@@ -134,7 +137,7 @@ def merge_audio_video(output_filename):
             "-acodec", "copy",
             "-vcodec", "copy",
             output_filename ]
-    print "ffmpeg command is:", command
+    print "ffmpeg command is:"+ command
 
     if OS_WIN:
         sp.call(command, shell=True)
@@ -159,7 +162,7 @@ if __name__ == "__main__":
         output_filename = os.path.join(OUTPUT_DIR, args.output + ".mp4")
     else:
         output_filename = os.path.join(OUTPUT_DIR, "{}_video.mp4".format(OUT_PREFIX))
-    print "Output filename set to:", output_filename
+    print "Output filename set to:"+output_filename
 
     if not args.skip_download:
         master_json_url = args.url
@@ -169,7 +172,7 @@ if __name__ == "__main__":
         if resp.status_code != 200:
             match = re.search("<TITLE>(.+)<\/TITLE>", resp.content, re.IGNORECASE)
             title = match.group(1)
-            print "HTTP error (" + str(resp.status_code) + "): " + title
+            # print "HTTP error (" + str(resp.status_code) + "): " + title
             quit(0)
         content = resp.json()
         base_url = urlparse.urljoin(master_json_url, content["base_url"])
@@ -181,7 +184,7 @@ if __name__ == "__main__":
     # Overwrite timestamp if skipping download
     if args.skip_download:
         TIMESTAMP = args.skip_download
-        print "Overriding timestamp with:", TIMESTAMP
+        print "Overriding timestamp with:"+TIMESTAMP
 
     # Combine audio and video
     if not args.skip_merge:

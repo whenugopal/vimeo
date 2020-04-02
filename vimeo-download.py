@@ -66,7 +66,7 @@ def download_video(base_url, content):
     filename = os.path.join(INSTANCE_TEMP, "v.mp4")
     # print "saving to %s" % filename
     # print "saving to filename ::"
-    print filename
+    # print filename
 
 
     video_file = open(filename, "wb")

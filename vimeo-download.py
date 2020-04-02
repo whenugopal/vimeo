@@ -65,7 +65,7 @@ def download_video(base_url, content):
     # Download the video portion of the stream
     filename = os.path.join(INSTANCE_TEMP, "v.mp4")
     # print "saving to %s" % filename
-    print "saving to filename ::"
+    # print "saving to filename ::"
     print filename
 
 
@@ -96,7 +96,7 @@ def download_audio(base_url, content):
     result = True
     audio = content[0]
     audio_base_url = urlparse.urljoin(base_url, audio["base_url"])
-    print "audio base url:"
+    # print "audio base url:"
     print audio_base_url
 
 

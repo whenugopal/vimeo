@@ -54,8 +54,8 @@ def download_video(base_url, content):
     idx, _ = max(heights, key=lambda t: t[1])
     video = content[idx]
     video_base_url = urlparse.urljoin(base_url, video["base_url"])
-    print "video base url:"
-    print video_base_url
+    # print "video base url:"
+    # print video_base_url
 
     # Create INSTANCE_TEMP if it doesn"t exist
     if not os.path.exists(INSTANCE_TEMP):
